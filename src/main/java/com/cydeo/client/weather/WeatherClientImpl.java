@@ -37,8 +37,4 @@ public class WeatherClientImpl {
         return weatherResponse.current.temperature;
     }
 
-
-
-
-
 }
