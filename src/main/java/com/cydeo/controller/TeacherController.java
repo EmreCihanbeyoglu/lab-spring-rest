@@ -3,6 +3,7 @@ package com.cydeo.controller;
 import com.cydeo.dto.ResponseDTO;
 import com.cydeo.dto.TeacherDTO;
 import com.cydeo.service.TeacherService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -74,7 +75,7 @@ public class TeacherController {
      */
 
     @PostMapping
-    public ResponseEntity<ResponseDTO> createTeacher(@RequestBody TeacherDTO teacherDTO) {
+    public ResponseEntity<ResponseDTO> createTeacher(@RequestBody @Valid TeacherDTO teacherDTO) {
         ResponseDTO responseDTO = ResponseDTO
                 .builder()
                 .success(true)
