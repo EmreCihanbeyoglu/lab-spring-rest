@@ -19,7 +19,7 @@ public class ExceptionWrapper {
     private String message;
     private String path;
 
-    private List<ValidationError> validationErrorList;
+    private List<ValidationException> validationExceptionList;
     private Integer errorCount;
 
     public ExceptionWrapper(Integer status, String message, String path) {

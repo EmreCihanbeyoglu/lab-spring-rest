@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
 
     // DTO class fields validation like username, birthday, email, phone number etc
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ExceptionWrapper> exceptionHandler(MethodArgumentNotValidException exception, HttpServletRequest request) {
+    public ResponseEntity<ExceptionWrapper> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException exception, HttpServletRequest request) {
 
         // to be able to see the exceptions in the console additionally
         exception.printStackTrace();
@@ -55,7 +55,7 @@ public class GlobalExceptionHandler {
         ExceptionWrapper exceptionWrapper = new ExceptionWrapper(HttpStatus.BAD_REQUEST.value(), message, request.getRequestURI());
 
 
-        List<ValidationError> validationErrors = new ArrayList<>();
+        List<ValidationException> validationExceptions = new ArrayList<>();
 
         for (ObjectError error : exception.getBindingResult().getAllErrors()) {
 
@@ -63,12 +63,12 @@ public class GlobalExceptionHandler {
             Object rejectedValue = ((FieldError) error).getRejectedValue();
             String reason = error.getDefaultMessage();
 
-            ValidationError validationError = new ValidationError(errorField, rejectedValue, reason);
-            validationErrors.add(validationError);
+            ValidationException validationException = new ValidationException(errorField, rejectedValue, reason);
+            validationExceptions.add(validationException);
         }
 
-        exceptionWrapper.setValidationErrorList(validationErrors);
-        exceptionWrapper.setErrorCount(validationErrors.size());
+        exceptionWrapper.setValidationExceptionList(validationExceptions);
+        exceptionWrapper.setErrorCount(validationExceptions.size());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(exceptionWrapper);

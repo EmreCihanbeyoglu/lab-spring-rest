@@ -5,7 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ValidationError {
+public class ValidationException {
 
     private String errorField;
     private Object rejectedValue;
